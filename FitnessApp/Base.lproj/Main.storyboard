@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="23" translatesAutoresizingMaskIntoConstraints="NO" id="s4D-PG-oAp">
-                                <rect key="frame" x="16" y="114" width="361" height="624"/>
+                                <rect key="frame" x="16" y="192" width="361" height="468"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="DZA-wQ-1Q2" userLabel="Rounds Stack">
                                         <rect key="frame" x="0.0" y="0.0" width="361" height="26.333333333333332"/>
@@ -43,16 +43,19 @@
                                         </connections>
                                     </slider>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zab-Op-b3q" userLabel="Warm Up Stack">
-                                        <rect key="frame" x="0.0" y="102.33333333333334" width="361" height="216.00000000000003"/>
+                                        <rect key="frame" x="0.0" y="102.33333333333331" width="361" height="60"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Warm Up" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J1p-VT-jwH">
-                                                <rect key="frame" x="0.0" y="0.0" width="124.33333333333333" height="216"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="124.33333333333333" height="60"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ojd-UK-Njj" userLabel="Warm Up Picker">
-                                                <rect key="frame" x="124.33333333333336" y="0.0" width="236.66666666666663" height="216"/>
+                                                <rect key="frame" x="124.33333333333336" y="0.0" width="236.66666666666663" height="60"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="60" id="5Fh-zd-7kb"/>
+                                                </constraints>
                                             </pickerView>
                                         </subviews>
                                         <constraints>
@@ -60,61 +63,67 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eOb-GW-Oyo" userLabel="Work Stack">
-                                        <rect key="frame" x="0.0" y="341.33333333333331" width="361" height="60"/>
+                                        <rect key="frame" x="0.0" y="185.33333333333331" width="361" height="60"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Work" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l0e-0z-lGG" userLabel="Work">
-                                                <rect key="frame" x="0.0" y="0.0" width="121" height="60"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="124.33333333333333" height="60"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" datePickerMode="countDownTimer" minuteInterval="1" useCurrentDate="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EZE-8p-q0Y" userLabel="Work Count Down Picker">
-                                                <rect key="frame" x="121" y="0.0" width="240" height="60"/>
+                                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c3j-bE-H5g" userLabel="Work Picker">
+                                                <rect key="frame" x="124.33333333333336" y="0.0" width="236.66666666666663" height="60"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="240" id="GEk-fA-H5a"/>
-                                                    <constraint firstAttribute="height" constant="60" id="rTz-0f-w2R"/>
+                                                    <constraint firstAttribute="height" constant="60" id="R75-Z2-LR6"/>
                                                 </constraints>
-                                            </datePicker>
+                                            </pickerView>
                                         </subviews>
+                                        <constraints>
+                                            <constraint firstItem="c3j-bE-H5g" firstAttribute="width" secondItem="l0e-0z-lGG" secondAttribute="width" multiplier="1.9" id="SPQ-N1-njo"/>
+                                        </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QBU-4U-Ol6" userLabel="Rest Stack">
-                                        <rect key="frame" x="0.0" y="424.33333333333337" width="361" height="60"/>
+                                        <rect key="frame" x="0.0" y="268.33333333333331" width="361" height="60"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rest" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DGl-o7-64T">
-                                                <rect key="frame" x="0.0" y="0.0" width="121" height="60"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="124.33333333333333" height="60"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" datePickerMode="countDownTimer" minuteInterval="1" useCurrentDate="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1ew-wr-haG" userLabel="Rest Count Down Picker">
-                                                <rect key="frame" x="121" y="0.0" width="240" height="60"/>
+                                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hS6-CJ-pkv" userLabel="Rest Picker">
+                                                <rect key="frame" x="124.33333333333336" y="0.0" width="236.66666666666663" height="60"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="60" id="0Bk-Pf-aq0"/>
-                                                    <constraint firstAttribute="width" constant="240" id="Y0e-gL-SbP"/>
+                                                    <constraint firstAttribute="height" constant="60" id="gOv-De-5cD"/>
                                                 </constraints>
-                                            </datePicker>
+                                            </pickerView>
                                         </subviews>
+                                        <constraints>
+                                            <constraint firstItem="hS6-CJ-pkv" firstAttribute="width" secondItem="DGl-o7-64T" secondAttribute="width" multiplier="1.9" id="qJE-qI-1nv"/>
+                                        </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fwS-tq-gEC" userLabel="Cool Down Stack">
-                                        <rect key="frame" x="0.0" y="507.33333333333337" width="361" height="60"/>
+                                        <rect key="frame" x="0.0" y="351.33333333333337" width="361" height="60"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cool Down" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6QI-7C-9UR" userLabel="Cool Down">
-                                                <rect key="frame" x="0.0" y="0.0" width="121" height="60"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="124.33333333333333" height="60"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" datePickerMode="countDownTimer" minuteInterval="1" useCurrentDate="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sje-mE-eqN" userLabel="Cool Down Count Down Picker">
-                                                <rect key="frame" x="121" y="0.0" width="240" height="60"/>
+                                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FpZ-NA-302" userLabel="Cool Down Picker">
+                                                <rect key="frame" x="124.33333333333336" y="0.0" width="236.66666666666663" height="60"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="60" id="p2R-mg-icl"/>
-                                                    <constraint firstAttribute="width" constant="240" id="xfV-ww-vQa"/>
+                                                    <constraint firstAttribute="height" constant="60" id="r1W-a9-JNx"/>
                                                 </constraints>
-                                            </datePicker>
+                                            </pickerView>
                                         </subviews>
+                                        <constraints>
+                                            <constraint firstItem="FpZ-NA-302" firstAttribute="width" secondItem="6QI-7C-9UR" secondAttribute="width" multiplier="1.9" id="LYF-f0-TcT"/>
+                                        </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="bwg-04-S0e" userLabel="Total Stack">
-                                        <rect key="frame" x="0.0" y="590.33333333333337" width="361" height="33.666666666666629"/>
+                                        <rect key="frame" x="0.0" y="434.33333333333337" width="361" height="33.666666666666686"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Total" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gFe-c8-fIo">
                                                 <rect key="frame" x="0.0" y="0.0" width="269" height="33.666666666666664"/>
@@ -143,8 +152,11 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="coolDownPicker" destination="FpZ-NA-302" id="5WD-q6-eLp"/>
+                        <outlet property="restPicker" destination="hS6-CJ-pkv" id="2Ei-Uf-OIy"/>
                         <outlet property="roundsCountLabel" destination="m8m-Ps-Ayd" id="nUr-L9-dIx"/>
                         <outlet property="warmUpPicker" destination="Ojd-UK-Njj" id="Z90-Ah-DUX"/>
+                        <outlet property="workPicker" destination="c3j-bE-H5g" id="B1F-WH-L7p"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

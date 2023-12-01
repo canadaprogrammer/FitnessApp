@@ -10,6 +10,9 @@ import UIKit
 class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     @IBOutlet var roundsCountLabel: UILabel!
     @IBOutlet var warmUpPicker: UIPickerView!
+    @IBOutlet var workPicker: UIPickerView!
+    @IBOutlet var restPicker: UIPickerView!
+    @IBOutlet var coolDownPicker: UIPickerView!
     
     var pickerData:[[Int]] = [[Int]]()
     let range:[Int] = Array(0..<60)
@@ -22,13 +25,23 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         super.viewDidLoad()
         
         roundsCountLabel.text = String(roundsCount)
+        pickerData = [range, range]
         
         self.warmUpPicker.delegate = self
         self.warmUpPicker.dataSource = self
-        
-        pickerData = [range, range]
-        
         warmUpPicker.setPickerLabels(labelSize: 20.0, labelTexts: labelTexts)
+        
+        self.workPicker.delegate = self
+        self.workPicker.dataSource = self
+        workPicker.setPickerLabels(labelSize: 20.0, labelTexts: labelTexts)
+        
+        self.restPicker.delegate = self
+        self.restPicker.dataSource = self
+        restPicker.setPickerLabels(labelSize: 20.0, labelTexts: labelTexts)
+        
+        self.coolDownPicker.delegate = self
+        self.coolDownPicker.dataSource = self
+        coolDownPicker.setPickerLabels(labelSize: 20.0, labelTexts: labelTexts)
         
     }
     
