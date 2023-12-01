@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="23" translatesAutoresizingMaskIntoConstraints="NO" id="s4D-PG-oAp">
-                                <rect key="frame" x="16" y="192" width="361" height="468"/>
+                                <rect key="frame" x="16" y="114" width="361" height="624"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="DZA-wQ-1Q2" userLabel="Rounds Stack">
                                         <rect key="frame" x="0.0" y="0.0" width="361" height="26.333333333333332"/>
@@ -43,25 +43,24 @@
                                         </connections>
                                     </slider>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zab-Op-b3q" userLabel="Warm Up Stack">
-                                        <rect key="frame" x="0.0" y="102.33333333333331" width="361" height="60"/>
+                                        <rect key="frame" x="0.0" y="102.33333333333334" width="361" height="216.00000000000003"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Warm Up" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J1p-VT-jwH">
-                                                <rect key="frame" x="0.0" y="0.0" width="121" height="60"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="124.33333333333333" height="216"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" datePickerMode="countDownTimer" minuteInterval="1" useCurrentDate="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nda-lN-1eO" userLabel="Warm Up Count Down Picker">
-                                                <rect key="frame" x="121" y="0.0" width="240" height="60"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="60" id="Aj3-Oc-gin"/>
-                                                    <constraint firstAttribute="width" constant="240" id="kbN-Hj-7bb"/>
-                                                </constraints>
-                                            </datePicker>
+                                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ojd-UK-Njj" userLabel="Warm Up Picker">
+                                                <rect key="frame" x="124.33333333333336" y="0.0" width="236.66666666666663" height="216"/>
+                                            </pickerView>
                                         </subviews>
+                                        <constraints>
+                                            <constraint firstItem="Ojd-UK-Njj" firstAttribute="width" secondItem="J1p-VT-jwH" secondAttribute="width" multiplier="1.9" id="mjj-ua-UgI"/>
+                                        </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eOb-GW-Oyo" userLabel="Work Stack">
-                                        <rect key="frame" x="0.0" y="185.33333333333331" width="361" height="60"/>
+                                        <rect key="frame" x="0.0" y="341.33333333333331" width="361" height="60"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Work" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l0e-0z-lGG" userLabel="Work">
                                                 <rect key="frame" x="0.0" y="0.0" width="121" height="60"/>
@@ -79,7 +78,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QBU-4U-Ol6" userLabel="Rest Stack">
-                                        <rect key="frame" x="0.0" y="268.33333333333331" width="361" height="60"/>
+                                        <rect key="frame" x="0.0" y="424.33333333333337" width="361" height="60"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rest" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DGl-o7-64T">
                                                 <rect key="frame" x="0.0" y="0.0" width="121" height="60"/>
@@ -97,7 +96,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fwS-tq-gEC" userLabel="Cool Down Stack">
-                                        <rect key="frame" x="0.0" y="351.33333333333337" width="361" height="60"/>
+                                        <rect key="frame" x="0.0" y="507.33333333333337" width="361" height="60"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cool Down" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6QI-7C-9UR" userLabel="Cool Down">
                                                 <rect key="frame" x="0.0" y="0.0" width="121" height="60"/>
@@ -115,7 +114,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="bwg-04-S0e" userLabel="Total Stack">
-                                        <rect key="frame" x="0.0" y="434.33333333333337" width="361" height="33.666666666666686"/>
+                                        <rect key="frame" x="0.0" y="590.33333333333337" width="361" height="33.666666666666629"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Total" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gFe-c8-fIo">
                                                 <rect key="frame" x="0.0" y="0.0" width="269" height="33.666666666666664"/>
@@ -144,16 +143,13 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="coolDownPicker" destination="sje-mE-eqN" id="b2R-qe-YC5"/>
-                        <outlet property="restPicker" destination="1ew-wr-haG" id="KMe-zd-ZUe"/>
                         <outlet property="roundsCountLabel" destination="m8m-Ps-Ayd" id="nUr-L9-dIx"/>
-                        <outlet property="warmUpPicker" destination="Nda-lN-1eO" id="77S-HQ-Flm"/>
-                        <outlet property="workPicker" destination="EZE-8p-q0Y" id="gnB-av-BhY"/>
+                        <outlet property="warmUpPicker" destination="Ojd-UK-Njj" id="Z90-Ah-DUX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="84.732824427480907" y="-2.1126760563380285"/>
+            <point key="canvasLocation" x="-383.96946564885496" y="119.01408450704226"/>
         </scene>
     </scenes>
     <resources>
