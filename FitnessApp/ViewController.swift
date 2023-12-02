@@ -13,6 +13,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     @IBOutlet var workPicker: UIPickerView!
     @IBOutlet var restPicker: UIPickerView!
     @IBOutlet var coolDownPicker: UIPickerView!
+    @IBOutlet var totalLabel: UILabel!
     
     var pickerData:[[Int]] = [[Int]]()
     let range:[Int] = Array(0..<60)
@@ -21,6 +22,17 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     var labelTexts = ["Min", "Sec"]
     
+    var selectedWarmUp:[String:Int] = ["Minutes":0, "Seconds":0]
+    var selectedWork:[String:Int] = ["Minutes":0, "Seconds":0]
+    var selectedRest:[String:Int] = ["Minutes":0, "Seconds":0]
+    var selectedCoolDown:[String:Int] = ["Minutes":0, "Seconds":0]
+    
+    var warmUpSeconds: Int = 0
+    var workSeconds: Int = 0
+    var restSeconds: Int = 0
+    var coolDownSeconds: Int = 0
+    var totalSeconds:Int = 0
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -66,7 +78,50 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        print(pickerData[component][row])
+        
+        switch pickerView {
+        case warmUpPicker:
+            if component == 0 {
+                selectedWarmUp["Minutes"] = pickerData[component][row]
+            } else {
+                selectedWarmUp["Seconds"] = pickerData[component][row]
+            }
+            break
+        case workPicker:
+            if component == 0 {
+                selectedWork["Minutes"] = pickerData[component][row]
+            } else {
+                selectedWork["Seconds"] = pickerData[component][row]
+            }
+            break
+        case restPicker:
+            if component == 0 {
+                selectedRest["Minutes"] = pickerData[component][row]
+            } else {
+                selectedRest["Seconds"] = pickerData[component][row]
+            }
+            break
+        case coolDownPicker:
+            if component == 0 {
+                selectedCoolDown["Minutes"] = pickerData[component][row]
+            } else {
+                selectedCoolDown["Seconds"] = pickerData[component][row]
+            }
+        default:
+            break
+        }
+        
+        
+        warmUpSeconds = selectedWarmUp["Minutes"]! * 60 + selectedWarmUp["Seconds"]!
+        workSeconds = selectedWork["Minutes"]! * 60 + selectedWork["Seconds"]!
+        restSeconds = selectedRest["Minutes"]! * 60 + selectedRest["Seconds"]!
+        coolDownSeconds = selectedCoolDown["Minutes"]! * 60 + selectedCoolDown["Seconds"]!
+        totalSeconds = warmUpSeconds + coolDownSeconds + (workSeconds + restSeconds) * roundsCount
+        let totalMinutes = String(format: "%02d", Int(totalSeconds / 60))
+        let totalSeconds = String(format: "%02d", Int(totalSeconds % 60))
+        
+        totalLabel.text = "\(totalMinutes):\(totalSeconds)"
+        print(totalSeconds)
     }
 }
 

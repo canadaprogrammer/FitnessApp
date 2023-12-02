@@ -36,7 +36,7 @@
                                             </label>
                                         </subviews>
                                     </stackView>
-                                    <slider opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.0" maxValue="30" minimumValueImage="0.square.fill" catalog="system" maximumValueImage="30.square.fill" translatesAutoresizingMaskIntoConstraints="NO" id="Yef-AJ-8nW">
+                                    <slider opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="30" minimumValueImage="0.square.fill" catalog="system" maximumValueImage="30.square.fill" translatesAutoresizingMaskIntoConstraints="NO" id="Yef-AJ-8nW">
                                         <rect key="frame" x="-2" y="49.333333333333343" width="365" height="31"/>
                                         <connections>
                                             <action selector="roundsSliderChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="2Yi-3x-avg"/>
@@ -155,6 +155,7 @@
                         <outlet property="coolDownPicker" destination="FpZ-NA-302" id="5WD-q6-eLp"/>
                         <outlet property="restPicker" destination="hS6-CJ-pkv" id="2Ei-Uf-OIy"/>
                         <outlet property="roundsCountLabel" destination="m8m-Ps-Ayd" id="nUr-L9-dIx"/>
+                        <outlet property="totalLabel" destination="aWk-a2-k2E" id="Qfn-4Y-TdM"/>
                         <outlet property="warmUpPicker" destination="Ojd-UK-Njj" id="Z90-Ah-DUX"/>
                         <outlet property="workPicker" destination="c3j-bE-H5g" id="B1F-WH-L7p"/>
                     </connections>
