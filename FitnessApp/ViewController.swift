@@ -8,6 +8,9 @@
 import UIKit
 
 class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+    
+    var timer = Timer()
+    
     @IBOutlet var roundsCountLabel: UILabel!
     @IBOutlet var warmUpPicker: UIPickerView!
     @IBOutlet var workPicker: UIPickerView!
@@ -18,14 +21,14 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     var pickerData:[[Int]] = [[Int]]()
     let range:[Int] = Array(0..<60)
     
-    var roundsCount: Int = 0
+//    var roundsCount: Int = 0
     
     var labelTexts = ["Min", "Sec"]
     
-    var selectedWarmUp:[String:Int] = ["Minutes":0, "Seconds":0]
-    var selectedWork:[String:Int] = ["Minutes":0, "Seconds":0]
-    var selectedRest:[String:Int] = ["Minutes":0, "Seconds":0]
-    var selectedCoolDown:[String:Int] = ["Minutes":0, "Seconds":0]
+//    var selectedWarmUp = timeInput(minutes: 0, seconds: 0)
+//    var selectedWork = timeInput(minutes: 0, seconds: 0)
+//    var selectedRest = timeInput(minutes: 0, seconds: 0)
+//    var selectedCoolDown = timeInput(minutes: 0, seconds: 0)
     
     var warmUpSeconds: Int = 0
     var workSeconds: Int = 0
@@ -36,7 +39,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        roundsCountLabel.text = String(roundsCount)
+        roundsCountLabel.text = String(timer.rounds)
         pickerData = [range, range]
         
         self.warmUpPicker.delegate = self
@@ -58,8 +61,8 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     }
     
     @IBAction func roundsSliderChanged(_ sender: UISlider) {
-        roundsCount = Int(sender.value)
-        roundsCountLabel.text = String(roundsCount)
+        timer.rounds = Int(sender.value)
+        roundsCountLabel.text = String(timer.rounds)
     }
     
     override func didReceiveMemoryWarning() {
@@ -82,46 +85,54 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         switch pickerView {
         case warmUpPicker:
             if component == 0 {
-                selectedWarmUp["Minutes"] = pickerData[component][row]
+                timer.warmUp.minutes = pickerData[component][row]
             } else {
-                selectedWarmUp["Seconds"] = pickerData[component][row]
+                timer.warmUp.seconds = pickerData[component][row]
             }
             break
         case workPicker:
             if component == 0 {
-                selectedWork["Minutes"] = pickerData[component][row]
+                timer.work.minutes = pickerData[component][row]
             } else {
-                selectedWork["Seconds"] = pickerData[component][row]
+                timer.work.seconds = pickerData[component][row]
             }
             break
         case restPicker:
             if component == 0 {
-                selectedRest["Minutes"] = pickerData[component][row]
+                timer.rest.minutes = pickerData[component][row]
             } else {
-                selectedRest["Seconds"] = pickerData[component][row]
+                timer.rest.seconds = pickerData[component][row]
             }
             break
         case coolDownPicker:
             if component == 0 {
-                selectedCoolDown["Minutes"] = pickerData[component][row]
+                timer.coolDown.minutes = pickerData[component][row]
             } else {
-                selectedCoolDown["Seconds"] = pickerData[component][row]
+                timer.coolDown.seconds = pickerData[component][row]
             }
         default:
             break
         }
         
         
-        warmUpSeconds = selectedWarmUp["Minutes"]! * 60 + selectedWarmUp["Seconds"]!
-        workSeconds = selectedWork["Minutes"]! * 60 + selectedWork["Seconds"]!
-        restSeconds = selectedRest["Minutes"]! * 60 + selectedRest["Seconds"]!
-        coolDownSeconds = selectedCoolDown["Minutes"]! * 60 + selectedCoolDown["Seconds"]!
-        totalSeconds = warmUpSeconds + coolDownSeconds + (workSeconds + restSeconds) * roundsCount
-        let totalMinutes = String(format: "%02d", Int(totalSeconds / 60))
-        let totalSeconds = String(format: "%02d", Int(totalSeconds % 60))
+//        warmUpSeconds = timer.warmUp.minutes * 60 + timer.warmUp.seconds
+//        workSeconds = (timer.work.minutes * 60 + timer.work.seconds) * timer.rounds
+//        let restSecondsUnit = timer.rest.minutes * 60 + timer.rest.seconds
+//        restSeconds = restSecondsUnit * timer.rounds
+//        
+//        if restSeconds > 0 {
+//            restSeconds -= restSecondsUnit
+//        }
+//        
+//        coolDownSeconds = timer.coolDown.minutes * 60 + timer.coolDown.seconds
+//        totalSeconds = warmUpSeconds + coolDownSeconds + workSeconds + restSeconds
         
-        totalLabel.text = "\(totalMinutes):\(totalSeconds)"
-        print(totalSeconds)
+        totalLabel.text = timer.printMinutesSeconds(minutes: Int(timer.CalculateSeconds()["totalSeconds"]! / 60), seconds: Int(timer.CalculateSeconds()["totalSeconds"]! % 60))
+    }
+    @IBSegueAction func settings(_ coder: NSCoder) -> TimerViewController? {
+        let timerViewcontroller = TimerViewController(coder: coder)
+        timerViewcontroller?.timer = timer
+        return timerViewcontroller
     }
 }
 
