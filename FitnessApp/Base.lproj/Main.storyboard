@@ -178,10 +178,10 @@
             </objects>
             <point key="canvasLocation" x="-459" y="108"/>
         </scene>
-        <!--Timer-->
+        <!--CountDown-->
         <scene sceneID="UqH-gq-AaI">
             <objects>
-                <viewController id="e6G-V2-tcD" customClass="TimerViewController" customModule="FitnessApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="e6G-V2-tcD" userLabel="CountDown" customClass="CountDownViewController" customModule="FitnessApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xJa-JT-4qW">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -275,7 +275,7 @@
                             <constraint firstItem="c3e-3u-Jwv" firstAttribute="trailing" secondItem="4DN-pz-QpB" secondAttribute="trailing" constant="16" id="xrC-Yi-KAb"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Timer" id="W6V-5w-PlA">
+                    <navigationItem key="navigationItem" title="Count Down" id="W6V-5w-PlA">
                         <barButtonItem key="rightBarButtonItem" style="done" id="FYx-fN-vdu">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="9Oc-Qt-5lc">
                                 <rect key="frame" x="290" y="5" width="87" height="34.333333333333336"/>
@@ -287,11 +287,11 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="countDownLabel" destination="GOt-u9-JcY" id="CM8-85-G4Q"/>
                         <outlet property="playPauseButton" destination="4DN-pz-QpB" id="2ov-1g-Rgl"/>
                         <outlet property="remainingTimeLabel" destination="mIW-6V-82m" id="8ar-nb-nDc"/>
                         <outlet property="roundsLabel" destination="Eop-1y-Vre" id="s2i-od-K9c"/>
                         <outlet property="statusLabel" destination="pDC-dB-vhH" id="itP-9W-nuX"/>
-                        <outlet property="timerLabel" destination="GOt-u9-JcY" id="PEb-lj-hUa"/>
                         <outlet property="totalTimeLabel" destination="U9D-Tk-jtn" id="Ao2-Fs-yy7"/>
                     </connections>
                 </viewController>
@@ -307,7 +307,7 @@
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textAttributes key="titleTextAttributes">
-                            <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                         </textAttributes>
                     </navigationBar>
                     <connections>

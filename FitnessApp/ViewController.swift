@@ -9,7 +9,7 @@ import UIKit
 
 class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
-    var timer = Timer()
+    var countDown = CountDown()
     
     @IBOutlet var roundsCountLabel: UILabel!
     @IBOutlet var roundsSlider: UISlider!
@@ -64,30 +64,30 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         self.coolDownPicker.dataSource = self
         coolDownPicker.setPickerLabels(labelSize: 20.0, labelTexts: labelTexts)
         
-        roundsCountLabel.text = String(timer.rounds)
-        roundsSlider.value = Float(timer.rounds)
+        roundsCountLabel.text = String(countDown.rounds)
+        roundsSlider.value = Float(countDown.rounds)
         
-        warmUpPicker!.selectRow(timer.warmUp.minutes, inComponent: 0, animated: true)
-        warmUpPicker!.selectRow(timer.warmUp.seconds, inComponent: 1, animated: true)
+        warmUpPicker!.selectRow(countDown.warmUp.minutes, inComponent: 0, animated: true)
+        warmUpPicker!.selectRow(countDown.warmUp.seconds, inComponent: 1, animated: true)
         
-        workPicker!.selectRow(timer.work.minutes, inComponent: 0, animated: true)
-        workPicker!.selectRow(timer.work.seconds, inComponent: 1, animated: true)
+        workPicker!.selectRow(countDown.work.minutes, inComponent: 0, animated: true)
+        workPicker!.selectRow(countDown.work.seconds, inComponent: 1, animated: true)
         
-        restPicker!.selectRow(timer.rest.minutes, inComponent: 0, animated: true)
-        restPicker!.selectRow(timer.rest.seconds, inComponent: 1, animated: true)
+        restPicker!.selectRow(countDown.rest.minutes, inComponent: 0, animated: true)
+        restPicker!.selectRow(countDown.rest.seconds, inComponent: 1, animated: true)
         
-        coolDownPicker!.selectRow(timer.coolDown.minutes, inComponent: 0, animated: true)
-        coolDownPicker!.selectRow(timer.coolDown.seconds, inComponent: 1, animated: true)
+        coolDownPicker!.selectRow(countDown.coolDown.minutes, inComponent: 0, animated: true)
+        coolDownPicker!.selectRow(countDown.coolDown.seconds, inComponent: 1, animated: true)
     }
     
     
     func updateTotal() {
-        totalLabel.text = timer.printMinutesSeconds(minutes: Int(timer.CalculateSeconds()["totalSeconds"]! / 60), seconds: Int(timer.CalculateSeconds()["totalSeconds"]! % 60))
+        totalLabel.text = countDown.printMinutesSeconds(minutes: Int(countDown.CalculateSeconds()["totalSeconds"]! / 60), seconds: Int(countDown.CalculateSeconds()["totalSeconds"]! % 60))
     }
     
     @IBAction func roundsSliderChanged(_ sender: UISlider) {
-        timer.rounds = Int(sender.value)
-        roundsCountLabel.text = String(timer.rounds)
+        countDown.rounds = Int(sender.value)
+        roundsCountLabel.text = String(countDown.rounds)
         
         updateTotal()
     }
@@ -112,30 +112,30 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         switch pickerView {
         case warmUpPicker:
             if component == 0 {
-                timer.warmUp.minutes = pickerData[component][row]
+                countDown.warmUp.minutes = pickerData[component][row]
             } else {
-                timer.warmUp.seconds = pickerData[component][row]
+                countDown.warmUp.seconds = pickerData[component][row]
             }
             break
         case workPicker:
             if component == 0 {
-                timer.work.minutes = pickerData[component][row]
+                countDown.work.minutes = pickerData[component][row]
             } else {
-                timer.work.seconds = pickerData[component][row]
+                countDown.work.seconds = pickerData[component][row]
             }
             break
         case restPicker:
             if component == 0 {
-                timer.rest.minutes = pickerData[component][row]
+                countDown.rest.minutes = pickerData[component][row]
             } else {
-                timer.rest.seconds = pickerData[component][row]
+                countDown.rest.seconds = pickerData[component][row]
             }
             break
         case coolDownPicker:
             if component == 0 {
-                timer.coolDown.minutes = pickerData[component][row]
+                countDown.coolDown.minutes = pickerData[component][row]
             } else {
-                timer.coolDown.seconds = pickerData[component][row]
+                countDown.coolDown.seconds = pickerData[component][row]
             }
         default:
             break
@@ -143,10 +143,10 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         
         updateTotal()
     }
-    @IBSegueAction func settings(_ coder: NSCoder) -> TimerViewController? {
-        let timerViewcontroller = TimerViewController(coder: coder)
-        timerViewcontroller?.timer = timer
-        return timerViewcontroller
+    @IBSegueAction func settings(_ coder: NSCoder) -> CountDownViewController? {
+        let countDownViewcontroller = CountDownViewController(coder: coder)
+        countDownViewcontroller?.countDown = countDown
+        return countDownViewcontroller
     }
 }
 

@@ -1,10 +1,10 @@
 //
-//  Timer.swift
+//  CountDown.swift
 //  FitnessApp
 //
 //  Created by Jungjin Park on 2023-12-03.
 //
-struct Timer {
+struct CountDown {
     var rounds: Int
     var warmUp: timeInput
     var work: timeInput
