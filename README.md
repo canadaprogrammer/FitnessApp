@@ -10,3 +10,5 @@
 - Views
   - Settings View
   - Timer View
+- Model
+  - Timer
