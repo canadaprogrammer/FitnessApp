@@ -12,6 +12,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     var timer = Timer()
     
     @IBOutlet var roundsCountLabel: UILabel!
+    @IBOutlet var roundsSlider: UISlider!
     @IBOutlet var warmUpPicker: UIPickerView!
     @IBOutlet var workPicker: UIPickerView!
     @IBOutlet var restPicker: UIPickerView!
@@ -39,9 +40,14 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        roundsCountLabel.text = String(timer.rounds)
         pickerData = [range, range]
         
+        initializePickers()
+        
+        updateTotal()
+    }
+    
+    func initializePickers() {
         self.warmUpPicker.delegate = self
         self.warmUpPicker.dataSource = self
         warmUpPicker.setPickerLabels(labelSize: 20.0, labelTexts: labelTexts)
@@ -58,11 +64,32 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         self.coolDownPicker.dataSource = self
         coolDownPicker.setPickerLabels(labelSize: 20.0, labelTexts: labelTexts)
         
+        roundsCountLabel.text = String(timer.rounds)
+        roundsSlider.value = Float(timer.rounds)
+        
+        warmUpPicker!.selectRow(timer.warmUp.minutes, inComponent: 0, animated: true)
+        warmUpPicker!.selectRow(timer.warmUp.seconds, inComponent: 1, animated: true)
+        
+        workPicker!.selectRow(timer.work.minutes, inComponent: 0, animated: true)
+        workPicker!.selectRow(timer.work.seconds, inComponent: 1, animated: true)
+        
+        restPicker!.selectRow(timer.rest.minutes, inComponent: 0, animated: true)
+        restPicker!.selectRow(timer.rest.seconds, inComponent: 1, animated: true)
+        
+        coolDownPicker!.selectRow(timer.coolDown.minutes, inComponent: 0, animated: true)
+        coolDownPicker!.selectRow(timer.coolDown.seconds, inComponent: 1, animated: true)
+    }
+    
+    
+    func updateTotal() {
+        totalLabel.text = timer.printMinutesSeconds(minutes: Int(timer.CalculateSeconds()["totalSeconds"]! / 60), seconds: Int(timer.CalculateSeconds()["totalSeconds"]! % 60))
     }
     
     @IBAction func roundsSliderChanged(_ sender: UISlider) {
         timer.rounds = Int(sender.value)
         roundsCountLabel.text = String(timer.rounds)
+        
+        updateTotal()
     }
     
     override func didReceiveMemoryWarning() {
@@ -114,20 +141,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             break
         }
         
-        
-//        warmUpSeconds = timer.warmUp.minutes * 60 + timer.warmUp.seconds
-//        workSeconds = (timer.work.minutes * 60 + timer.work.seconds) * timer.rounds
-//        let restSecondsUnit = timer.rest.minutes * 60 + timer.rest.seconds
-//        restSeconds = restSecondsUnit * timer.rounds
-//        
-//        if restSeconds > 0 {
-//            restSeconds -= restSecondsUnit
-//        }
-//        
-//        coolDownSeconds = timer.coolDown.minutes * 60 + timer.coolDown.seconds
-//        totalSeconds = warmUpSeconds + coolDownSeconds + workSeconds + restSeconds
-        
-        totalLabel.text = timer.printMinutesSeconds(minutes: Int(timer.CalculateSeconds()["totalSeconds"]! / 60), seconds: Int(timer.CalculateSeconds()["totalSeconds"]! % 60))
+        updateTotal()
     }
     @IBSegueAction func settings(_ coder: NSCoder) -> TimerViewController? {
         let timerViewcontroller = TimerViewController(coder: coder)

@@ -168,6 +168,7 @@
                         <outlet property="coolDownPicker" destination="FpZ-NA-302" id="5WD-q6-eLp"/>
                         <outlet property="restPicker" destination="hS6-CJ-pkv" id="2Ei-Uf-OIy"/>
                         <outlet property="roundsCountLabel" destination="m8m-Ps-Ayd" id="nUr-L9-dIx"/>
+                        <outlet property="roundsSlider" destination="Yef-AJ-8nW" id="bkl-Ug-9yN"/>
                         <outlet property="totalLabel" destination="aWk-a2-k2E" id="Qfn-4Y-TdM"/>
                         <outlet property="warmUpPicker" destination="Ojd-UK-Njj" id="Z90-Ah-DUX"/>
                         <outlet property="workPicker" destination="c3j-bE-H5g" id="B1F-WH-L7p"/>
@@ -186,7 +187,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="hbH-f0-Sza">
-                                <rect key="frame" x="16" y="181.66666666666666" width="361" height="488.66666666666674"/>
+                                <rect key="frame" x="16" y="189.66666666666666" width="361" height="472.66666666666674"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Round 1/6" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eop-1y-Vre">
                                         <rect key="frame" x="0.0" y="0.0" width="361" height="46.666666666666664"/>
@@ -211,8 +212,8 @@
                                             </label>
                                         </subviews>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="zBt-oz-jB7">
-                                        <rect key="frame" x="0.0" y="297" width="361" height="83"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="zBt-oz-jB7">
+                                        <rect key="frame" x="0.0" y="297" width="361" height="75"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Remaining Time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rVk-B0-1a8">
                                                 <rect key="frame" x="0.0" y="0.0" width="361" height="26.333333333333332"/>
@@ -221,15 +222,15 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="40:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mIW-6V-82m">
-                                                <rect key="frame" x="0.0" y="42.333333333333314" width="361" height="40.666666666666657"/>
+                                                <rect key="frame" x="0.0" y="34.333333333333314" width="361" height="40.666666666666657"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="quw-Eq-FCF">
-                                        <rect key="frame" x="0.0" y="420" width="361" height="68.666666666666686"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="quw-Eq-FCF">
+                                        <rect key="frame" x="0.0" y="412" width="361" height="60.666666666666686"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w6m-IC-rNO">
                                                 <rect key="frame" x="0.0" y="0.0" width="361" height="26.333333333333332"/>
@@ -238,7 +239,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="40:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U9D-Tk-jtn">
-                                                <rect key="frame" x="0.0" y="42.333333333333371" width="361" height="26.333333333333329"/>
+                                                <rect key="frame" x="0.0" y="34.333333333333371" width="361" height="26.333333333333329"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -248,14 +249,14 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4DN-pz-QpB">
-                                <rect key="frame" x="16" y="702.33333333333337" width="361" height="99.666666666666629"/>
+                                <rect key="frame" x="16" y="694.33333333333337" width="361" height="107.66666666666663"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" image="play.fill" catalog="system">
                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="70"/>
                                 </state>
                                 <state key="selected" image="pause.fill" catalog="system">
-                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="17"/>
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="70"/>
                                 </state>
                                 <connections>
                                     <action selector="playPuaseButtonTapped:" destination="e6G-V2-tcD" eventType="touchUpInside" id="lHj-VF-rSX"/>
