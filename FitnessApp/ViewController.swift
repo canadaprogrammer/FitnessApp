@@ -22,14 +22,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     var pickerData:[[Int]] = [[Int]]()
     let range:[Int] = Array(0..<60)
     
-//    var roundsCount: Int = 0
-    
     var labelTexts = ["Min", "Sec"]
-    
-//    var selectedWarmUp = timeInput(minutes: 0, seconds: 0)
-//    var selectedWork = timeInput(minutes: 0, seconds: 0)
-//    var selectedRest = timeInput(minutes: 0, seconds: 0)
-//    var selectedCoolDown = timeInput(minutes: 0, seconds: 0)
     
     var warmUpSeconds: Int = 0
     var workSeconds: Int = 0
@@ -82,7 +75,8 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     
     func updateTotal() {
-        totalLabel.text = countDown.printMinutesSeconds(minutes: Int(countDown.CalculateSeconds()["totalSeconds"]! / 60), seconds: Int(countDown.CalculateSeconds()["totalSeconds"]! % 60))
+        countDown.CalculateSeconds()
+        totalLabel.text = countDown.printMinutesSeconds(minutes: Int(countDown.totalSeconds / 60), seconds: Int(countDown.totalSeconds % 60))
     }
     
     @IBAction func roundsSliderChanged(_ sender: UISlider) {

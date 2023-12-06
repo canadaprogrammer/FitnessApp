@@ -10,38 +10,66 @@ struct CountDown {
     var work: timeInput
     var rest: timeInput
     var coolDown: timeInput
+    var warmUpSeconds: Int
+    var workSecondsUnit: Int
+    var workSeconds: Int
+    var restSecondsUnit: Int
+    var restSeconds: Int
+    var coolDownSeconds: Int
+    var totalSeconds: Int
     var remainingTime: Int
     
-    init(rounds: Int = 13, warmUp: timeInput = timeInput(minutes: 2, seconds: 0), work: timeInput = timeInput(minutes: 1, seconds: 0), rest: timeInput = timeInput(minutes: 2, seconds: 0), coolDown: timeInput = timeInput(minutes: 3, seconds: 0), remainingTime: Int = 0) {
+    init(rounds: Int = 2, warmUp: timeInput = timeInput(minutes: 0, seconds: 5), work: timeInput = timeInput(minutes: 0, seconds: 10), rest: timeInput = timeInput(minutes: 0, seconds: 5), coolDown: timeInput = timeInput(minutes: 0, seconds: 10), remainingTime: Int = 0) {
         self.rounds = rounds
         self.warmUp = warmUp
         self.work = work
         self.rest = rest
         self.coolDown = coolDown
         self.remainingTime = remainingTime
-    }
-    
-    mutating func CalculateSeconds() -> [String: Int] {
-        let warmUpSeconds = self.warmUp.minutes * 60 + self.warmUp.seconds
-        let workSeconds = (self.work.minutes * 60 + self.work.seconds) * self.rounds
-        let restSecondsUnit = self.rest.minutes * 60 + self.rest.seconds
-        var restSeconds = restSecondsUnit * self.rounds
         
-        if restSeconds > 0 {
-            restSeconds -= restSecondsUnit
+        self.warmUpSeconds = warmUp.minutes * 60 + warmUp.seconds
+        
+        self.workSecondsUnit = work.minutes * 60 + work.seconds
+        self.workSeconds = (work.minutes * 60 + work.seconds) * rounds
+        
+        self.restSecondsUnit = rest.minutes * 60 + rest.seconds
+        self.restSeconds = self.restSecondsUnit * rounds
+        
+        if self.restSeconds > 0 {
+            self.restSeconds -= self.restSecondsUnit
         }
         
-        let coolDownSeconds = self.coolDown.minutes * 60 + self.coolDown.seconds
-        let totalSeconds = warmUpSeconds + coolDownSeconds + workSeconds + restSeconds
-        self.remainingTime = totalSeconds
+        self.coolDownSeconds = coolDown.minutes * 60 + coolDown.seconds
+        self.totalSeconds = self.warmUpSeconds + self.coolDownSeconds + self.workSeconds + self.restSeconds
+        self.remainingTime = self.totalSeconds
+    }
+    
+    mutating func CalculateSeconds() {
+        self.warmUpSeconds = self.warmUp.minutes * 60 + self.warmUp.seconds
+        self.workSecondsUnit = work.minutes * 60 + work.seconds
+        self.workSeconds = self.workSecondsUnit * self.rounds
+        self.restSecondsUnit = rest.minutes * 60 + rest.seconds
+        self.restSeconds = self.restSecondsUnit * self.rounds
         
-        return ["warmUpSeconds": warmUpSeconds, "workSeconds": workSeconds, "restSeconds": restSeconds, "coolDownSeconds": coolDownSeconds, "totalSeconds": totalSeconds]
+        if self.restSeconds > 0 {
+            self.restSeconds -= self.restSecondsUnit
+        }
+        
+        self.coolDownSeconds = self.coolDown.minutes * 60 + self.coolDown.seconds
+        self.totalSeconds = self.warmUpSeconds + self.coolDownSeconds + self.workSeconds + self.restSeconds
+        self.remainingTime = self.totalSeconds
     }
     
     
     func printMinutesSeconds(minutes: Int, seconds: Int) -> String {
         let minutesTwoDigits = String(format: "%02d", minutes)
         let secondsTwoDigits = String(format: "%02d", seconds)
+        return "\(minutesTwoDigits):\(secondsTwoDigits)"
+    }
+
+    func printMinutesSeconds(seconds: Int) -> String {
+        let minutesTwoDigits = String(format: "%02d", Int(seconds / 60))
+        let secondsTwoDigits = String(format: "%02d", Int(seconds % 60))
         return "\(minutesTwoDigits):\(secondsTwoDigits)"
     }
 }
