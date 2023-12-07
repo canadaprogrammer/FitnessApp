@@ -42,20 +42,7 @@ class CountDownViewController: UIViewController {
         initialRestSeconds = countDown.restSecondsUnit
         totalRounds = countDown.rounds
         
-        roundsLabel.text = "Round \(currentRound) / \(totalRounds)"
-        if countDown.warmUp.minutes > 0 || countDown.warmUp.seconds > 0 {
-            statusLabel.text = "Warm Up"
-            countDownLabel.text = countDown.printMinutesSeconds(minutes: countDown.warmUp.minutes, seconds: countDown.warmUp.seconds)
-        } else if countDown.work.minutes > 0 || countDown.work.seconds > 0{
-            statusLabel.text = "Work"
-            countDownLabel.text = countDown.printMinutesSeconds(minutes: countDown.work.minutes, seconds: countDown.work.seconds)
-        } else {
-            statusLabel.text = "No Work"
-            countDownLabel.text = "00:00"
-        }
-        
-        remainingTimeLabel.text = countDown.printMinutesSeconds(minutes: Int(countDown.remainingTime / 60), seconds: Int(countDown.remainingTime % 60))
-        totalTimeLabel.text = countDown.printMinutesSeconds(minutes: Int(countDown.totalSeconds / 60), seconds: Int(countDown.totalSeconds % 60))
+        updateUI()
     }
     
     @IBAction func playPuaseButtonTapped(_ sender: UIButton) {
@@ -78,7 +65,36 @@ class CountDownViewController: UIViewController {
             mainTimer.invalidate()
         }
     }
+    @IBAction func resetButtonTapped(_ sender: Any) {
+        remainingTimer.invalidate()
+        mainTimer.invalidate()
+
+        initializeTimer()
+    }
     
+    func initializeTimer() {
+        isPlaying = false
+        self.countDown.rounds = totalRounds
+        currentRound = 1
+        countDown.CalculateSeconds()
+        updateUI()
+    }
+    func updateUI() {
+        roundsLabel.text = "Round \(currentRound) / \(totalRounds)"
+        if countDown.warmUp.minutes > 0 || countDown.warmUp.seconds > 0 {
+            statusLabel.text = "Warm Up"
+            countDownLabel.text = countDown.printMinutesSeconds(minutes: countDown.warmUp.minutes, seconds: countDown.warmUp.seconds)
+        } else if countDown.work.minutes > 0 || countDown.work.seconds > 0 {
+            statusLabel.text = "Work"
+            countDownLabel.text = countDown.printMinutesSeconds(minutes: countDown.work.minutes, seconds: countDown.work.seconds)
+        } else {
+            statusLabel.text = "No Work"
+            countDownLabel.text = "00:00"
+        }
+        
+        remainingTimeLabel.text = countDown.printMinutesSeconds(minutes: Int(countDown.remainingTime / 60), seconds: Int(countDown.remainingTime % 60))
+        totalTimeLabel.text = countDown.printMinutesSeconds(minutes: Int(countDown.totalSeconds / 60), seconds: Int(countDown.totalSeconds % 60))
+    }
     func countDownTimer() {
         mainTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
             if self.countDown.warmUpSeconds > 0 {
@@ -122,7 +138,7 @@ class CountDownViewController: UIViewController {
                 }
             } else {
                 timer.invalidate()
-                self.statusLabel.text = "Finish"
+                self.initializeTimer()
             }
         }
     }
