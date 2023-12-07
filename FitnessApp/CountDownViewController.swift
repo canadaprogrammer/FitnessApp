@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AVKit
 
 class CountDownViewController: UIViewController {
     var countDown = CountDown()
@@ -84,21 +85,27 @@ class CountDownViewController: UIViewController {
                 self.countDown.warmUpSeconds -= 1
                 self.countDownLabel.text = self.countDown.printMinutesSeconds(seconds: self.countDown.warmUpSeconds)
                 self.statusLabel.text = "Warm Up"
+                if self.countDown.warmUpSeconds == 0 {
+                    AudioServicesPlaySystemSound(SystemSoundID(1008))
+                }
             } else if self.countDown.workSecondsUnit > 0 {
                 self.countDown.workSecondsUnit -= 1
                 self.countDownLabel.text = self.countDown.printMinutesSeconds(seconds: self.countDown.workSecondsUnit)
                 self.statusLabel.text = "Work"
+                if self.countDown.workSecondsUnit == 0 {
+                    AudioServicesPlaySystemSound(SystemSoundID(1013))
+                }
             } else if self.countDown.restSecondsUnit > 0 {
                 self.countDown.restSecondsUnit -= 1
                 self.countDownLabel.text = self.countDown.printMinutesSeconds(seconds: self.countDown.restSecondsUnit)
                 self.statusLabel.text = "Rest"
                 // next round
                 if self.countDown.restSecondsUnit == 0 {
+                    AudioServicesPlaySystemSound(SystemSoundID(1008))
                     if self.countDown.rounds > 1 {
                         self.countDown.rounds -= 1
                         self.currentRound += 1
                         self.roundsLabel.text = "Round \(self.currentRound) / \(self.totalRounds)"
-                        
                         self.countDown.workSecondsUnit = self.initialWorkSeconds
                         // the last round doesn't have rest
                         if self.countDown.rounds > 1 {
@@ -110,6 +117,9 @@ class CountDownViewController: UIViewController {
                 self.countDown.coolDownSeconds -= 1
                 self.countDownLabel.text = self.countDown.printMinutesSeconds(seconds: self.countDown.coolDownSeconds)
                 self.statusLabel.text = "Cool Down"
+                if self.countDown.coolDownSeconds == 0 {
+                    AudioServicesPlaySystemSound(SystemSoundID(1017))
+                }
             } else {
                 timer.invalidate()
                 self.statusLabel.text = "Finish"
