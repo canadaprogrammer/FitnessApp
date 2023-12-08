@@ -19,7 +19,7 @@ struct CountDown {
     var totalSeconds: Int
     var remainingTime: Int
     
-    init(rounds: Int = 2, warmUp: timeInput = timeInput(minutes: 0, seconds: 5), work: timeInput = timeInput(minutes: 0, seconds: 10), rest: timeInput = timeInput(minutes: 0, seconds: 5), coolDown: timeInput = timeInput(minutes: 0, seconds: 10), remainingTime: Int = 0) {
+    init(rounds: Int = 13, warmUp: timeInput = timeInput(minutes: 2, seconds: 0), work: timeInput = timeInput(minutes: 1, seconds: 0), rest: timeInput = timeInput(minutes: 2, seconds: 0), coolDown: timeInput = timeInput(minutes: 3, seconds: 0), remainingTime: Int = 0) {
         self.rounds = rounds
         self.warmUp = warmUp
         self.work = work
