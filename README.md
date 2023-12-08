@@ -22,3 +22,4 @@
 4. Click on the + symbol to add a capability.
 5. Double-click Background Modes.
 6. Check Audio, AirPlay, and Picture in Picture box to enable background audio.
+7. Check Background processing to run in the background.
