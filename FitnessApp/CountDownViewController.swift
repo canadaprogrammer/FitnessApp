@@ -101,23 +101,35 @@ class CountDownViewController: UIViewController {
                 self.countDown.warmUpSeconds -= 1
                 self.countDownLabel.text = self.countDown.printMinutesSeconds(seconds: self.countDown.warmUpSeconds)
                 self.statusLabel.text = "Warm Up"
+                if self.countDown.warmUpSeconds < 4 {
+                    self.countDownLabel.textColor = .red
+                }
                 if self.countDown.warmUpSeconds == 0 {
                     AudioServicesPlaySystemSound(SystemSoundID(1008))
+                    self.countDownLabel.textColor = .black
                 }
             } else if self.countDown.workSecondsUnit > 0 {
                 self.countDown.workSecondsUnit -= 1
                 self.countDownLabel.text = self.countDown.printMinutesSeconds(seconds: self.countDown.workSecondsUnit)
                 self.statusLabel.text = "Work"
+                if self.countDown.workSecondsUnit < 4 {
+                    self.countDownLabel.textColor = .red
+                }
                 if self.countDown.workSecondsUnit == 0 {
                     AudioServicesPlaySystemSound(SystemSoundID(1013))
+                    self.countDownLabel.textColor = .black
                 }
             } else if self.countDown.restSecondsUnit > 0 {
                 self.countDown.restSecondsUnit -= 1
                 self.countDownLabel.text = self.countDown.printMinutesSeconds(seconds: self.countDown.restSecondsUnit)
                 self.statusLabel.text = "Rest"
+                if self.countDown.restSecondsUnit < 4 {
+                    self.countDownLabel.textColor = .red
+                }
                 // next round
                 if self.countDown.restSecondsUnit == 0 {
                     AudioServicesPlaySystemSound(SystemSoundID(1008))
+                    self.countDownLabel.textColor = .black
                     if self.countDown.rounds > 1 {
                         self.countDown.rounds -= 1
                         self.currentRound += 1
