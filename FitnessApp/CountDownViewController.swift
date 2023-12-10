@@ -7,9 +7,11 @@
 
 import UIKit
 import AVKit
+import AVFoundation
 
 class CountDownViewController: UIViewController {
     var alertController: UIAlertController?
+    let speechSynthesizer = AVSpeechSynthesizer()
     
     var countDown = CountDown()
     
@@ -107,9 +109,10 @@ class CountDownViewController: UIViewController {
                     self.countDownLabel.textColor = .red
                 }
                 if self.countDown.warmUpSeconds == 0 {
-                    AudioServicesPlaySystemSound(SystemSoundID(1008))
+//                    AudioServicesPlaySystemSound(SystemSoundID(1008))
                     self.countDownLabel.textColor = .label
-                    self.showAlertMsg("Start Work")
+//                    self.showAlertMsg("Start Work")
+                    self.speech("Start")
                 }
             } else if self.countDown.workSecondsUnit > 0 {
                 self.countDown.workSecondsUnit -= 1
@@ -119,10 +122,14 @@ class CountDownViewController: UIViewController {
                     self.countDownLabel.textColor = .red
                 }
                 if self.countDown.workSecondsUnit == 0 {
-                    AudioServicesPlaySystemSound(SystemSoundID(1013))
+//                    AudioServicesPlaySystemSound(SystemSoundID(1013))
                     self.countDownLabel.textColor = .label
-                    self.showAlertMsg("Finish Work")
-
+//                    self.showAlertMsg("Finish Work")
+                    if(self.countDown.rounds > 1) {
+                        self.speech("Rest")
+                    } else {
+                        self.speech("Cool Down")
+                    }
                 }
             } else if self.countDown.restSecondsUnit > 0 {
                 self.countDown.restSecondsUnit -= 1
@@ -133,9 +140,10 @@ class CountDownViewController: UIViewController {
                 }
                 // next round
                 if self.countDown.restSecondsUnit == 0 {
-                    AudioServicesPlaySystemSound(SystemSoundID(1008))
+//                    AudioServicesPlaySystemSound(SystemSoundID(1008))
                     self.countDownLabel.textColor = .label
-                    self.showAlertMsg("Start Work")
+//                    self.showAlertMsg("Start Work")
+                    self.speech("Start")
                     if self.countDown.rounds > 1 {
                         self.countDown.rounds -= 1
                         self.currentRound += 1
@@ -152,8 +160,9 @@ class CountDownViewController: UIViewController {
                 self.countDownLabel.text = self.countDown.printMinutesSeconds(seconds: self.countDown.coolDownSeconds)
                 self.statusLabel.text = "Cool Down"
                 if self.countDown.coolDownSeconds == 0 {
-                    AudioServicesPlaySystemSound(SystemSoundID(1017))
-                    self.showAlertMsg("Done")
+//                    AudioServicesPlaySystemSound(SystemSoundID(1017))
+//                    self.showAlertMsg("Done")
+                    self.speech("Done")
                 }
             } else {
                 timer.invalidate()
@@ -175,6 +184,12 @@ class CountDownViewController: UIViewController {
         }
         self.alertController!.addAction(cancelAction)
         self.present(self.alertController!, animated: true, completion: nil)
+    }
+    
+    func speech(_ speak: String) {
+        let utterance = AVSpeechUtterance(string: speak)
+        utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+        self.speechSynthesizer.speak(utterance)
     }
     /*
     // MARK: - Navigation
