@@ -9,6 +9,8 @@ import UIKit
 import AVKit
 
 class CountDownViewController: UIViewController {
+    var alertController: UIAlertController?
+    
     var countDown = CountDown()
     
     var isPlaying: Bool = false {
@@ -106,7 +108,8 @@ class CountDownViewController: UIViewController {
                 }
                 if self.countDown.warmUpSeconds == 0 {
                     AudioServicesPlaySystemSound(SystemSoundID(1008))
-                    self.countDownLabel.textColor = .black
+                    self.countDownLabel.textColor = .label
+                    self.showAlertMsg("Start Work")
                 }
             } else if self.countDown.workSecondsUnit > 0 {
                 self.countDown.workSecondsUnit -= 1
@@ -117,7 +120,9 @@ class CountDownViewController: UIViewController {
                 }
                 if self.countDown.workSecondsUnit == 0 {
                     AudioServicesPlaySystemSound(SystemSoundID(1013))
-                    self.countDownLabel.textColor = .black
+                    self.countDownLabel.textColor = .label
+                    self.showAlertMsg("Finish Work")
+
                 }
             } else if self.countDown.restSecondsUnit > 0 {
                 self.countDown.restSecondsUnit -= 1
@@ -129,7 +134,8 @@ class CountDownViewController: UIViewController {
                 // next round
                 if self.countDown.restSecondsUnit == 0 {
                     AudioServicesPlaySystemSound(SystemSoundID(1008))
-                    self.countDownLabel.textColor = .black
+                    self.countDownLabel.textColor = .label
+                    self.showAlertMsg("Start Work")
                     if self.countDown.rounds > 1 {
                         self.countDown.rounds -= 1
                         self.currentRound += 1
@@ -147,12 +153,28 @@ class CountDownViewController: UIViewController {
                 self.statusLabel.text = "Cool Down"
                 if self.countDown.coolDownSeconds == 0 {
                     AudioServicesPlaySystemSound(SystemSoundID(1017))
+                    self.showAlertMsg("Done")
                 }
             } else {
                 timer.invalidate()
                 self.initializeTimer()
             }
         }
+    }
+    
+    func showAlertMsg(_ message: String) {
+        guard self.alertController == nil else {
+            print("Alert alreay displayed")
+            return
+        }
+        
+        self.alertController = UIAlertController(title: "", message: message, preferredStyle: .alert)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { action in
+            self.alertController = nil;
+        }
+        self.alertController!.addAction(cancelAction)
+        self.present(self.alertController!, animated: true, completion: nil)
     }
     /*
     // MARK: - Navigation
