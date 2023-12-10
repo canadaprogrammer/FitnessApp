@@ -84,6 +84,7 @@ class CountDownViewController: UIViewController {
         updateUI()
     }
     func updateUI() {
+        countDownLabel.textColor = .label
         roundsLabel.text = "Round \(currentRound) / \(totalRounds)"
         if countDown.warmUp.minutes > 0 || countDown.warmUp.seconds > 0 {
             statusLabel.text = "Warm Up"
@@ -111,8 +112,8 @@ class CountDownViewController: UIViewController {
                 if self.countDown.warmUpSeconds == 0 {
                     AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
                     self.countDownLabel.textColor = .label
-//                    self.showAlertMsg("Start Work")
                     self.speech("Start")
+                    self.showAlertMsg("Start Work")
                 }
             } else if self.countDown.workSecondsUnit > 0 {
                 self.countDown.workSecondsUnit -= 1
@@ -124,7 +125,7 @@ class CountDownViewController: UIViewController {
                 if self.countDown.workSecondsUnit == 0 {
                     AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
                     self.countDownLabel.textColor = .label
-//                    self.showAlertMsg("Finish Work")
+                    self.showAlertMsg("Finish Work")
                     if(self.countDown.rounds > 1) {
                         self.speech("Rest")
                     } else {
@@ -142,7 +143,7 @@ class CountDownViewController: UIViewController {
                 if self.countDown.restSecondsUnit == 0 {
                     AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
                     self.countDownLabel.textColor = .label
-//                    self.showAlertMsg("Start Work")
+                    self.showAlertMsg("Start Work")
                     self.speech("Start")
                     if self.countDown.rounds > 1 {
                         self.countDown.rounds -= 1
@@ -161,7 +162,7 @@ class CountDownViewController: UIViewController {
                 self.statusLabel.text = "Cool Down"
                 if self.countDown.coolDownSeconds == 0 {
                     AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
-//                    self.showAlertMsg("Done")
+                    self.showAlertMsg("Done")
                     self.speech("Done")
                 }
             } else {
@@ -171,19 +172,20 @@ class CountDownViewController: UIViewController {
         }
     }
     
-    func showAlertMsg(_ message: String) {
+    func showAlertMsg(_ title: String) {
         guard self.alertController == nil else {
             print("Alert alreay displayed")
             return
         }
         
-        self.alertController = UIAlertController(title: "", message: message, preferredStyle: .alert)
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { action in
-            self.alertController = nil;
-        }
-        self.alertController!.addAction(cancelAction)
+        self.alertController = UIAlertController(title: title, message: "", preferredStyle: .alert)
         self.present(self.alertController!, animated: true, completion: nil)
+        
+        // dismiss programmatically after two seconds
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: {
+            self.alertController!.dismiss(animated: true, completion: nil)
+            self.alertController = nil
+        })
     }
     
     func speech(_ speak: String) {
