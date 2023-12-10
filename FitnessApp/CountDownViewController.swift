@@ -109,7 +109,7 @@ class CountDownViewController: UIViewController {
                     self.countDownLabel.textColor = .red
                 }
                 if self.countDown.warmUpSeconds == 0 {
-//                    AudioServicesPlaySystemSound(SystemSoundID(1008))
+                    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
                     self.countDownLabel.textColor = .label
 //                    self.showAlertMsg("Start Work")
                     self.speech("Start")
@@ -122,7 +122,7 @@ class CountDownViewController: UIViewController {
                     self.countDownLabel.textColor = .red
                 }
                 if self.countDown.workSecondsUnit == 0 {
-//                    AudioServicesPlaySystemSound(SystemSoundID(1013))
+                    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
                     self.countDownLabel.textColor = .label
 //                    self.showAlertMsg("Finish Work")
                     if(self.countDown.rounds > 1) {
@@ -140,7 +140,7 @@ class CountDownViewController: UIViewController {
                 }
                 // next round
                 if self.countDown.restSecondsUnit == 0 {
-//                    AudioServicesPlaySystemSound(SystemSoundID(1008))
+                    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
                     self.countDownLabel.textColor = .label
 //                    self.showAlertMsg("Start Work")
                     self.speech("Start")
@@ -160,7 +160,7 @@ class CountDownViewController: UIViewController {
                 self.countDownLabel.text = self.countDown.printMinutesSeconds(seconds: self.countDown.coolDownSeconds)
                 self.statusLabel.text = "Cool Down"
                 if self.countDown.coolDownSeconds == 0 {
-//                    AudioServicesPlaySystemSound(SystemSoundID(1017))
+                    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
 //                    self.showAlertMsg("Done")
                     self.speech("Done")
                 }
